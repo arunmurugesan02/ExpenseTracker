@@ -17,55 +17,37 @@ import {
 import {LIGHT60, Manatee, VIOLET100} from '../../constants/colors';
 import {fontFamilies} from '../../constants/size';
 import {Regular1} from '../../constants/TypoGraphy';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+import {
+  ALREADY_HAVE_AN_ACCOUNT,
+  LOGIN,
+  SIGNUP,
+  SIGNUP_WITH_GOOGLE,
+} from '../../constants/strings';
 const SignUpScreen = () => {
-  const navigation:any = useNavigation()
+  const navigation: any = useNavigation();
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
   const [checked, isChecked] = useState(false);
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: 'white' , justifyContent:'center'}}>
-      <View style={{margin: n(16)}}>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.wrapper}>
         <TextInput
           placeholder="Name"
           placeholderTextColor={Manatee}
-          style={{
-            borderWidth: 1,
-            padding: n(16),
-            borderRadius: n(16),
-            borderColor: LIGHT60,
-            marginBottom: n(24),
-          }}
+          style={styles.nameInputBox}
         />
         <TextInput
           placeholder="Email"
           placeholderTextColor={Manatee}
-          style={{
-            borderWidth: 1,
-            padding: n(16),
-            borderRadius: n(16),
-            borderColor: LIGHT60,
-            marginBottom: n(24),
-          }}
+          style={styles.nameInputBox}
         />
-        <View
-          style={{
-            height: n(56),
-            borderWidth: 1,
-            borderRadius: n(16),
-            borderColor: LIGHT60,
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            marginBottom: n(24),
-          }}>
+        <View style={styles.passwordContainer}>
           <TextInput
             placeholder="Password"
             placeholderTextColor={Manatee}
-            style={{
-              padding: n(16),
-            }}
+            style={styles.passwordInputBox}
           />
-          <Pressable onPress={() => {}} style={{marginRight: n(20)}}>
+          <Pressable onPress={() => {}} style={styles.eyeIcon}>
             <Feather
               name={isPasswordSecure ? 'eye' : 'eye-off'}
               size={20}
@@ -73,14 +55,7 @@ const SignUpScreen = () => {
             />
           </Pressable>
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            gap: n(10),
-            alignItems: 'center',
-            justifyContent: 'center',
-            paddingHorizontal: n(10)
-          }}>
+        <View style={styles.agreeContainer}>
           <TouchableOpacity onPress={() => isChecked(!checked)}>
             <Fontisto
               name={checked ? 'checkbox-active' : 'checkbox-passive'}
@@ -88,36 +63,23 @@ const SignUpScreen = () => {
               color={VIOLET100}
             />
           </TouchableOpacity>
-          <Regular1
-            style={{lineHeight: n(18), fontFamilies: fontFamilies.TEXT_500}}>
+          <Regular1 style={styles.agreeText1}>
             By signing up, you agree to the
-            <Regular1 style={{color: VIOLET100}}>
+            <Regular1 style={styles.agreeText2}>
               {' '}
               Terms of Service and Privacy Policy
             </Regular1>
           </Regular1>
         </View>
-        <View style={{gap: n(16), marginTop: n(27)}}>
-          <FullWidthButton buttonText="Sign Up" onPress={() => {}} />
-          <Regular1
-            style={{color: Manatee, textAlign: 'center', fontWeight: '700'}}>
-            Or with
-          </Regular1>
-          <GoogleButton buttonText="Sign Up with Google " onPress={() => {}} />
+        <View style={styles.googleButtonWrapper}>
+          <FullWidthButton buttonText={SIGNUP} onPress={() => {}} />
+          <Regular1 style={styles.orWithText}>Or with</Regular1>
+          <GoogleButton buttonText={SIGNUP_WITH_GOOGLE} onPress={() => {}} />
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginTop: n(19),
-          }}>
-          <Regular1>Already have an account? </Regular1>
-          <Pressable onPress={()=>navigation.navigate('LoginScreen')}>
-            <Regular1
-              style={{textDecorationLine: 'underline', color: VIOLET100}}>
-              Login
-            </Regular1>
+        <View style={styles.loginContainer}>
+          <Regular1>{ALREADY_HAVE_AN_ACCOUNT} </Regular1>
+          <Pressable onPress={() => navigation.navigate('LoginScreen')}>
+            <Regular1 style={styles.loginText}>{LOGIN}</Regular1>
           </Pressable>
         </View>
       </View>
@@ -127,4 +89,46 @@ const SignUpScreen = () => {
 
 export default SignUpScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  loginText: {textDecorationLine: 'underline', color: VIOLET100},
+  container: {flex: 1, backgroundColor: 'white', justifyContent: 'center'},
+  wrapper: {margin: n(16)},
+  nameInputBox: {
+    borderWidth: 1,
+    padding: n(16),
+    borderRadius: n(16),
+    borderColor: LIGHT60,
+    marginBottom: n(24),
+  },
+  passwordContainer: {
+    height: n(56),
+    borderWidth: 1,
+    borderRadius: n(16),
+    borderColor: LIGHT60,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: n(24),
+  },
+  passwordInputBox: {
+    padding: n(16),
+  },
+  eyeIcon: {marginRight: n(20)},
+  agreeContainer: {
+    flexDirection: 'row',
+    gap: n(10),
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: n(10),
+  },
+  agreeText1: {lineHeight: n(18), fontFamily: fontFamilies.TEXT_500},
+  agreeText2: {color: VIOLET100},
+  googleButtonWrapper: {gap: n(16), marginTop: n(27)},
+  orWithText: {color: Manatee, textAlign: 'center', fontWeight: '700'},
+  loginContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: n(19),
+  },
+});

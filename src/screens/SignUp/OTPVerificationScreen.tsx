@@ -17,41 +17,30 @@ const OTPVerificationScreen = () => {
   const [OTPvalue, setOTPvalue] = useState<string>('');
   return (
     <ScrollView
-      style={{
-        backgroundColor: 'white',
-      }}
-      contentContainerStyle={{justifyContent: 'center', flex: 1}}>
+      style={styles.container}
+      contentContainerStyle={styles.contentContainerStyle}>
       <KeyboardAvoidingView
         keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}
         behavior={Platform.OS === 'ios' ? 'padding' : 'position'}>
-        <View style={{margin: n(16)}}>
-          <Text36 style={{padding: n(10)}}>Enter your Verification Code</Text36>
+        <View style={styles.wrapper}>
+          <Text36 style={styles.verificationText}>
+            Enter your Verification Code
+          </Text36>
           <OTPTextView
             tintColor={VIOLET100}
-            containerStyle={{marginBottom: n(45)}}
+            containerStyle={styles.containerStyle}
             handleTextChange={i => setOTPvalue(i)}
-            textInputStyle={{
-              width: 40, // Adjust width as needed
-              height: 50, // Adjust height as needed
-              borderColor: 'gray',
-              borderRadius: 5,
-            }}
+            textInputStyle={styles.textInputStyle}
           />
-          <Title3 style={{color: VIOLET100, fontWeight: '600'}}>04.59</Title3>
-          <Regular1 style={{paddingVertical: n(16), fontWeight: '500'}}>
+          <Title3 style={styles.timeText}>04.59</Title3>
+          <Regular1 style={styles.descText}>
             We send verification code to your email{' '}
-            <Regular1 style={{color: VIOLET100}}>
+            <Regular1 style={styles.emailText}>
               brajaoma*****@gmail.com
             </Regular1>
             . You can check your inbox.
           </Regular1>
-          <Regular1
-            style={{
-              fontWeight: '700',
-              color: VIOLET100,
-              textDecorationLine: 'underline',
-              paddingBottom: n(46),
-            }}>
+          <Regular1 style={styles.resendText}>
             I didn’t received the code? Send again
           </Regular1>
           <FullWidthButton
@@ -67,4 +56,27 @@ const OTPVerificationScreen = () => {
 
 export default OTPVerificationScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'white',
+  },
+  contentContainerStyle: {justifyContent: 'center', flex: 1},
+  wrapper: {margin: n(16)},
+  verificationText: {padding: n(10)},
+  timeText: {color: VIOLET100, fontWeight: '600'},
+  resendText: {
+    fontWeight: '700',
+    color: VIOLET100,
+    textDecorationLine: 'underline',
+    paddingBottom: n(46),
+  },
+  emailText: {color: VIOLET100},
+  descText: {paddingVertical: n(16), fontWeight: '500'},
+  textInputStyle: {
+    width: 40,
+    height: 50,
+    borderColor: 'gray',
+    borderRadius: 5,
+  },
+  containerStyle: {marginBottom: n(45)},
+});

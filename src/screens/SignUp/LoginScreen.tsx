@@ -12,48 +12,27 @@ import n from '../../_helpers/normalize';
 import Feather from 'react-native-vector-icons/Feather';
 import {FullWidthButton} from '../../components/Button/CustomWidthButton';
 import {Regular1, Title3} from '../../constants/TypoGraphy';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+import {FORGOTPASSWORD, LOGIN, SIGNUP} from '../../constants/strings';
 
 const LoginScreen = () => {
-  const navigation :any = useNavigation()
+  const navigation: any = useNavigation();
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        backgroundColor: 'white',
-        justifyContent: 'center',
-      }}>
-      <View style={{padding: n(16)}}>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.wrapper}>
         <TextInput
           placeholder="Email"
           placeholderTextColor={Manatee}
-          style={{
-            borderWidth: 1,
-            padding: n(16),
-            borderRadius: n(16),
-            borderColor: LIGHT60,
-            marginBottom: n(24),
-          }}
+          style={styles.emailInputBox}
         />
-        <View
-          style={{
-            height: n(56),
-            borderWidth: 1,
-            borderRadius: n(16),
-            borderColor: LIGHT60,
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}>
+        <View style={styles.passwordWrapper}>
           <TextInput
             placeholder="Password"
             placeholderTextColor={Manatee}
-            style={{
-              padding: n(16),
-            }}
+            style={styles.passwordInputBox}
           />
-          <Pressable onPress={() => {}} style={{marginRight: n(20)}}>
+          <Pressable onPress={() => {}} style={styles.eyeIcon}>
             <Feather
               name={isPasswordSecure ? 'eye' : 'eye-off'}
               size={20}
@@ -62,41 +41,17 @@ const LoginScreen = () => {
           </Pressable>
         </View>
         <FullWidthButton
-          buttonText="Login"
+          buttonText={LOGIN}
           onPress={() => {}}
-          style={{marginVertical: n(40)}}
+          style={styles.loginButton}
         />
-        <Title3
-          style={{
-            color: VIOLET100,
-            textAlign: 'center',
-            fontWeight: '600',
-            marginBottom: n(38),
-          }}>
-          Forgot Password?
-        </Title3>
-        <View
-          style={{
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexDirection: 'row',
-          }}>
-          <Regular1
-            style={{
-              fontWeight: '500',
-              color: Manatee,
-            }}>
+        <Title3 style={styles.forgotPasswordText}>{FORGOTPASSWORD}</Title3>
+        <View style={styles.footerContainer}>
+          <Regular1 style={styles.accountYetText}>
             Don’t have an account yet?{' '}
           </Regular1>
           <Pressable onPress={() => navigation.navigate('SignUpScreen')}>
-            <Regular1
-              style={{
-                color: VIOLET100,
-                textDecorationLine: 'underline',
-                fontWeight: '500',
-              }}>
-              Sign Up
-            </Regular1>
+            <Regular1 style={styles.signUpText}>{SIGNUP}</Regular1>
           </Pressable>
         </View>
       </View>
@@ -106,4 +61,52 @@ const LoginScreen = () => {
 
 export default LoginScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+  },
+  emailInputBox: {
+    borderWidth: 1,
+    padding: n(16),
+    borderRadius: n(16),
+    borderColor: LIGHT60,
+    marginBottom: n(24),
+  },
+  passwordWrapper: {
+    height: n(56),
+    borderWidth: 1,
+    borderRadius: n(16),
+    borderColor: LIGHT60,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  passwordInputBox: {
+    padding: n(16),
+  },
+  eyeIcon: {marginRight: n(20)},
+  forgotPasswordText: {
+    color: VIOLET100,
+    textAlign: 'center',
+    fontWeight: '600',
+    marginBottom: n(38),
+  },
+  signUpText: {
+    color: VIOLET100,
+    textDecorationLine: 'underline',
+    fontWeight: '500',
+  },
+  footerContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+  },
+  accountYetText: {
+    fontWeight: '500',
+    color: Manatee,
+  },
+  loginButton: {marginVertical: n(40)},
+  wrapper: {padding: n(16)},
+});

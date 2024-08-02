@@ -18,33 +18,14 @@ const Slider: React.FC<Props> = ({item}) => {
     <View style={styles.container} key={item?.title}>
       <FastImage
         source={item?.img}
-        style={{
-          width: n(300),
-          height: n(214),
-          padding: n(30),
-        }}
+        style={styles.img}
         resizeMode={FastImage.resizeMode.contain}
       />
       <View>
-        <Title1
-          style={{
-            paddingTop: n(41),
-            marginHorizontal: n(47),
-            fontWeight: '700',
-            textAlign: 'center',
-          }}
-          numberOfLines={5}>
+        <Title1 style={styles.titleText} numberOfLines={5}>
           {item?.title}
         </Title1>
-        <Regular1
-          style={{
-            paddingTop: n(16),
-            marginHorizontal: n(47),
-            color: '#91919F',
-            textAlign: 'center',
-            fontWeight: '500',
-          }}
-          numberOfLines={5}>
+        <Regular1 style={styles.descText} numberOfLines={5}>
           {item?.desc}
         </Regular1>
       </View>
@@ -60,5 +41,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: SCREEN_HEIGHT * 0.8,
     justifyContent: 'center',
+  },
+  img: {
+    width: n(300),
+    height: n(214),
+    padding: n(30),
+  },
+  titleText: {
+    paddingTop: n(41),
+    marginHorizontal: n(47),
+    fontWeight: '700',
+    textAlign: 'center',
+  },
+  descText: {
+    paddingTop: n(16),
+    marginHorizontal: n(47),
+    color: '#91919F',
+    textAlign: 'center',
+    fontWeight: '500',
   },
 });

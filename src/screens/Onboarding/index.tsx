@@ -1,11 +1,12 @@
-import { useNavigation } from '@react-navigation/native';
-import React, { useRef, useState } from 'react';
-import { Animated, FlatList, SafeAreaView, StyleSheet, View } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import React, {useRef, useState} from 'react';
+import {Animated, FlatList, SafeAreaView, StyleSheet, View} from 'react-native';
 import n from '../../_helpers/normalize';
-import { FullWidthButton } from '../../components/Button/CustomWidthButton';
-import { onboardingData } from '../../constants/data';
+import {FullWidthButton} from '../../components/Button/CustomWidthButton';
+import {onboardingData} from '../../constants/data';
 import Pagination from './Children/Pagination';
 import Slider from './Children/Slider';
+import {LOGIN, SIGNUP} from '../../constants/strings';
 
 const OnBoardingScreen = () => {
   const [index, setIndex] = useState(0);
@@ -36,8 +37,7 @@ const OnBoardingScreen = () => {
     itemVisiblePercentThreshold: 50,
   }).current;
   return (
-    <SafeAreaView
-      style={{flex: 1, justifyContent: 'flex-end', marginVertical: n(30)}}>
+    <SafeAreaView style={styles.container}>
       <FlatList
         data={onboardingData}
         renderItem={({item}) => <Slider item={item} />}
@@ -50,13 +50,13 @@ const OnBoardingScreen = () => {
         viewabilityConfig={viewabilityConfig}
       />
       <Pagination data={onboardingData} scrollX={scrollX} index={index} />
-      <View style={{paddingHorizontal: n(20), gap: n(16)}}>
+      <View style={styles.buttonContainer}>
         <FullWidthButton
-          buttonText="Sign Up"
+          buttonText={SIGNUP}
           onPress={() => navigation.navigate('SignUpScreen')}
         />
         <FullWidthButton
-          buttonText="Login"
+          buttonText={LOGIN}
           primaryButton={false}
           onPress={() => navigation.navigate('LoginScreen')}
         />
@@ -67,4 +67,7 @@ const OnBoardingScreen = () => {
 
 export default OnBoardingScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {flex: 1, justifyContent: 'flex-end', marginVertical: n(30)},
+  buttonContainer: {paddingHorizontal: n(20), gap: n(16)},
+});
